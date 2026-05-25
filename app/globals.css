@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  --spacer-32: 20px;
-
   --color-base-white: #ffffff;
   --color-base-black: #000000;
   --color-primary: #1e1e1e;
@@ -10,17 +8,23 @@
   --color-secondary: #734137;
   --color-tertiary: #283b48;
   --color-accent: #ebe4df;
+
+  --font-spacing: 1.5px;
+  --spacer-32: 20px;
+  --element-block-gap: 32px;
 }
 
 @media screen and (min-width: 640px) {
   :root {
     --spacer-32: 24px;
+    --element-block-gap: 40px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   :root {
     --spacer-32: 32px;
+    --element-block-gap: 56px;
   }
 }
 
@@ -38,9 +42,17 @@ body {
 
 /* .c-font--h1 {} */
 
-/* .c-font--h2 {} */
+.c-font--h2 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 22px;
+}
 
-/* .c-font--h3 {} */
+.c-font--h3 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+}
 
 .c-font--h4 {
   font-size: 18px;
@@ -48,7 +60,23 @@ body {
   line-height: 20px;
 }
 
+/* .c-font--h5 {} */
+
+/* .c-font--h6 {} */
+
+/* .c-font--subline {} */
+
 @media screen and (min-width: 640px) {
+  .c-font--h2 {
+    font-size: 27px;
+    line-height: 31px;
+  }
+
+  .c-font--h3 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
   .c-font--h4 {
     font-size: 20px;
     line-height: 24px;
@@ -56,17 +84,21 @@ body {
 }
 
 @media screen and (min-width: 1024px) {
+  .c-font--h2 {
+    font-size: 34px;
+    line-height: 40px;
+  }
+
+  .c-font--h3 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
   .c-font--h4 {
     font-size: 22px;
     line-height: 28px;
   }
 }
-
-/* .c-font--h5 {} */
-
-/* .c-font--h6 {} */
-
-/* .c-font--subline {} */
 
 .c-font--uppercase {
   text-transform: uppercase;

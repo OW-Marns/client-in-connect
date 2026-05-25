@@ -6,6 +6,18 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
+# Standard Prompts
+
+Use these two prompts in order when starting a new page component.
+
+**Prompt 1 — Revision:**
+> Check `{ComponentName}OriginalFile.jsx` and revise it into `{ComponentName}.jsx` following the process in `AGENTS.md`.
+
+**Prompt 2 — Globals audit:**
+> Check `globals.css` in this repo. What CSS can we use in this file?
+
+---
+
 # Source Context
 
 Components in `app/page-components/` originate from a Figma export in a separate repo. They are pixel-perfect but rigid — not production-ready. Your role is to revise them into a single, reusable, responsive component with shared CSS.

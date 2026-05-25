@@ -218,6 +218,13 @@ const new_to_market_data = [
   },
 ];
 
+const amenitiesFor = (slide) => [
+  { value: slide.bedrooms, label: "BED" },
+  { value: slide.bathrooms, label: "BATH" },
+  { value: slide.carSpaces, label: "CAR" },
+  { value: slide.pools, label: "POOL" },
+];
+
 const ComparableListingsDesktop = (_props) => {
   const swiperRef = React.useRef(null);
   const [isEnd, setIsEnd] = React.useState(false);
@@ -269,13 +276,6 @@ const ComparableListingsDesktop = (_props) => {
       </button>
     </>
   );
-
-  const amenitiesFor = (slide) => [
-    { value: slide.bedrooms, label: "BED" },
-    { value: slide.bathrooms, label: "BATH" },
-    { value: slide.carSpaces, label: "CAR" },
-    { value: slide.pools, label: "POOL" },
-  ];
 
   return (
     <>
@@ -348,7 +348,7 @@ const ComparableListingsDesktop = (_props) => {
           padding: 14px var(--spacer-32);
         }
 
-        .comparable-item__amenities__item {
+        .case-studies-item__amenity {
           display: flex;
           flex-direction: row;
           justify-content: center;
@@ -357,9 +357,10 @@ const ComparableListingsDesktop = (_props) => {
         }
 
         .comparable-item__image {
-          width: 100%;
-          height: 250px;
           position: relative;
+          width: 100%;
+          aspect-ratio: 4/3;
+          background-color: rgba(0,0,0,0.05);
         }
 
         .comparable-item__detail {
@@ -438,10 +439,6 @@ const ComparableListingsDesktop = (_props) => {
             padding-block: 16px;
           }
 
-          .comparable-item__image {
-            height: 300px;
-          }
-
           .comparable-item__detail {
             padding-block: 16px;
           }
@@ -461,10 +458,6 @@ const ComparableListingsDesktop = (_props) => {
           .comparable-item__amenities {
             gap: 32px;
             padding-block: 20px;
-          }
-
-          .comparable-item__image {
-            height: 360px;
           }
 
           .comparable-item__detail {
@@ -535,32 +528,17 @@ const ComparableListingsDesktop = (_props) => {
                       </p>
                     </div>
 
-                    <div className="comparable-item__amenities">
+                    <div className="comparable-item__amenities c-font-body c-font-body--xs-w600-wide">
                       {amenitiesFor(slide).map(({ value, label }) => (
-                        <div
-                          key={label}
-                          className="comparable-item__amenities__item"
-                        >
-                          <p className="c-font-body c-font-body--xs-w600-wide">
-                            {value}
-                          </p>
-                          <p className="c-font-body c-font-body--xs-w600-wide">
-                            {label}
-                          </p>
+                        <div key={label} className="case-studies-item__amenity">
+                          <span>{value}</span>
+                          <span>{label}</span>
                         </div>
                       ))}
                     </div>
 
                     <div className="comparable-item__image">
-                      <Image
-                        src={slide.image}
-                        alt=""
-                        fill
-                        style={{
-                          objectFit: "cover",
-                          backgroundColor: "rgba(0,0,0,0.05)",
-                        }}
-                      />
+                      <Image fill alt="" src={slide.image} />
                     </div>
 
                     <div className="comparable-item__detail">
@@ -637,29 +615,14 @@ const ComparableListingsDesktop = (_props) => {
                     </div>
 
                     <div className="comparable-item__image">
-                      <Image
-                        src={slide.image}
-                        alt=""
-                        fill
-                        style={{
-                          objectFit: "cover",
-                          backgroundColor: "rgba(0,0,0,0.05)",
-                        }}
-                      />
+                      <Image fill alt="" src={slide.image} />
                     </div>
 
-                    <div className="comparable-item__amenities">
+                    <div className="comparable-item__amenities c-font-body c-font-body--xs-w600-wide">
                       {amenitiesFor(slide).map(({ value, label }) => (
-                        <div
-                          key={label}
-                          className="comparable-item__amenities__item"
-                        >
-                          <p className="c-font-body c-font-body--xs-w600-wide">
-                            {value}
-                          </p>
-                          <p className="c-font-body c-font-body--xs-w600-wide">
-                            {label}
-                          </p>
+                        <div key={label} className="case-studies-item__amenity">
+                          <span>{value}</span>
+                          <span>{label}</span>
                         </div>
                       ))}
                     </div>
