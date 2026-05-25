@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const rhymesDisplay = Playfair_Display({
+  variable: "--font-rhymes-display",
   subsets: ["latin"],
 });
 
@@ -25,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${rhymesDisplay.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
