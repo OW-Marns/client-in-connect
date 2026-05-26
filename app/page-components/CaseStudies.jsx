@@ -1,7 +1,9 @@
+import React from "react";
+import Image from "next/image";
+import { cn } from "../utils/cn";
 import { SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import Carousel from "../components/Carousel";
-import Image from "next/image";
 import { formatPrice } from "../utils/formatPrice";
 
 const slides = [
@@ -74,237 +76,271 @@ const amenitiesFor = (slide) => [
   { value: slide.pools, label: "POOL" },
 ];
 
-const CaseStudies = () => (
-  <>
-    <style>{`
-      .case-studies-item {
-        color: var(--color-primary);
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        align-items: flex-start;
-      }
+const CaseStudies = () => {
+  const swiperRef = React.useRef(null);
+  const [isEnd, setIsEnd] = React.useState(false);
+  const [isBeginning, setIsBeginning] = React.useState(true);
 
-      .case-studies-item__head {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        align-items: flex-start;
-      }
+  const navButtons = (
+    <>
+      <button
+        className={cn(
+          "swiper-button-prev c-font-body c-font-body--sm-w600-wide c-font--uppercase",
+          isBeginning ? "opacity-30" : "opacity-100",
+        )}
+        onClick={() => swiperRef.current?.slidePrev()}
+        disabled={isBeginning}
+      >
+        {`< PREV`}
+      </button>
+      <button
+        className={cn(
+          "swiper-button-next c-font-body c-font-body--sm-w600-wide c-font--uppercase",
+          isEnd ? "opacity-30" : "opacity-100",
+        )}
+        onClick={() => swiperRef.current?.slideNext()}
+        disabled={isEnd}
+      >
+        {`NEXT >`}
+      </button>
+    </>
+  );
 
-      .case-studies-item__head-info {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
+  return (
+    <>
+      <style>{`
+        #case_studies .swiper.common-carousel-swiper .swiper-pagination-bullet {
+          background-color: var(--color-primary);
+        }
 
-      .case-studies-item__icon {
-        width: 24px;
-        height: 24px;
-      }
-
-      .case-studies-item__amenities {
-        display: flex;
-        flex-direction: row;
-        gap: 32px;
-        align-items: center;
-      }
-
-      .case-studies-item__amenity {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .case-studies-item__content {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-      }
-
-      .case-studies-item__image-wrap {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 84/53;
-        background-color: rgba(0,0,0,0.05);
-      }
-
-      .case-studies-item__body {
-        display: flex;
-        flex-direction: column;
-        gap: var(--element-block-gap);
-      }
-
-      .case-studies-item__tag-row {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 36px;
-      }
-
-      .case-studies-item__price {
-        color: var(--color-secondary);
-      }
-
-      .case-studies-item__description {
-        white-space: pre-line;
-      }
-
-      .case-studies-item__stats {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 16px;
-        row-gap: 20px;
-      }
-
-      @media screen and (min-width: 640px) {
         .case-studies-item {
-          gap: 32px;
+          color: var(--color-primary);
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: var(--grid-spacer-40);
+          align-items: flex-start;
         }
 
         .case-studies-item__head {
-          gap: 32px;
+          width: 100%;
+          max-width: 840px;
+          display: flex;
+          flex-direction: column;
+          gap: var(--grid-spacer-40);
+          align-items: flex-start;
         }
 
         .case-studies-item__head-info {
-          gap: 4px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
         }
 
         .case-studies-item__icon {
-          width: 28px;
-          height: 28px;
+          width: var(--section-title-icon);
+          height: var(--section-title-icon);
         }
 
-        .case-studies-item__stats {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-
-      @media screen and (min-width: 1024px) {
-        .case-studies-item {
-          gap: 40px;
+        .case-studies-item__amenities {
+          display: flex;
+          flex-direction: row;
+          gap: var(--spacer-32);
+          align-items: center;
         }
 
-        .case-studies-item__head {
-          gap: 40px;
-          max-width: 840px;
-        }
-
-        .case-studies-item__head-info {
+        .case-studies-item__amenity {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
           gap: 6px;
         }
 
-        .case-studies-item__icon {
-          width: 32px;
-          height: 32px;
+        .case-studies-item__content {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
         }
 
-        .case-studies-item__content {
-          flex-direction: row;
-          align-items: flex-start;
-          gap: 40px;
+        .case-studies-item__image-wrap {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 84/53;
+          background-color: var(--bg-image-placeholder);
         }
 
         .case-studies-item__body {
-          width: 400px;
-          flex-shrink: 0;
+          display: flex;
+          flex-direction: column;
+          gap: var(--element-block-gap);
+        }
+
+        .case-studies-item__tag-row {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: var(--spacer-32);
+        }
+
+        .case-studies-item__price {
+          color: var(--color-secondary);
+        }
+
+        .case-studies-item__description {
+          white-space: pre-line;
         }
 
         .case-studies-item__stats {
+          display: grid;
           grid-template-columns: repeat(2, 1fr);
+          column-gap: 16px;
+          row-gap: 20px;
         }
-      }
-    `}</style>
 
-    <section id="case_studies" className="section">
-      <div className="section__container">
-        <div className="section__header">
-          <p className="section__title section__title--light">CASE STUDIES</p>
-        </div>
+        .case-studies-item__stat-value {
+          letter-spacing: var(--font-spacing-15);
+        }
 
-        <Carousel
-          modules={[Pagination]}
-          className="common-carousel-swiper w-full"
-          pagination={{ clickable: true }}
-          loop
-        >
-          {slides.map((slide) => (
-            <SwiperSlide key={slide.id}>
-              <div className="case-studies-item">
-                <div className="case-studies-item__head">
-                  <div className="case-studies-item__head-info">
-                    <Image
-                      width={32}
-                      height={32}
-                      className="case-studies-item__icon"
-                      src="/atlas.svg"
-                      alt="atlas"
-                    />
-                    <p className="c-font c-font--h2">{slide.address}</p>
-                    <p className="c-font-body c-font-body--sm-w600-wide c-font--uppercase">
-                      {slide.suburb}
-                    </p>
-                  </div>
+        @media screen and (min-width: 640px) {
+          .case-studies-item__head-info {
+            gap: 4px;
+          }
 
-                  <div className="case-studies-item__amenities c-font-body c-font-body--sm-w600-wide">
-                    {amenitiesFor(slide).map(({ value, label }) => (
-                      <div key={label} className="case-studies-item__amenity">
-                        <span>{value}</span>
-                        <span>{label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+          .case-studies-item__stats {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
 
-                <div className="case-studies-item__content">
-                  <div className="case-studies-item__image-wrap">
-                    <Image fill src={slide.image} alt={slide.address} />
-                  </div>
-                  <div className="case-studies-item__body">
-                    <div className="case-studies-item__tag-row">
-                      <span className="c-btn c-btn--secondary-solid c-btn--lg">
-                        {slide.tag}
-                      </span>
-                      <p className="case-studies-item__price c-font-body c-font-body--sm-w600-wide">
-                        ${formatPrice(slide.price)}
+        @media screen and (min-width: 1024px) {
+          .case-studies-item__head-info {
+            gap: 6px;
+          }
+
+          .case-studies-item__content {
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 40px;
+          }
+
+          .case-studies-item__body {
+            width: 400px;
+            flex-shrink: 0;
+          }
+
+          .case-studies-item__stats {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+      `}</style>
+
+      <section id="case_studies" className="section">
+        <div className="section__container">
+          <div className="section__header">
+            <p className="section__title section__title--light">CASE STUDIES</p>
+          </div>
+
+          <Carousel
+            loop={false}
+            navigation={false}
+            centeredSlides={false}
+            slidesPerView={1}
+            spaceBetween={24}
+            breakpoints={{
+              640: { spaceBetween: 32 },
+              1024: { spaceBetween: 40 },
+            }}
+            modules={[Pagination]}
+            className="common-carousel-swiper swiper-casestudies-navigation w-full"
+            pagination={{ clickable: true }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+          >
+            {slides.map((slide) => (
+              <SwiperSlide key={slide.id}>
+                <div className="case-studies-item">
+                  <div className="case-studies-item__head">
+                    <div className="case-studies-item__head-info">
+                      <Image
+                        width={24}
+                        height={24}
+                        className="case-studies-item__icon"
+                        src="/atlas.svg"
+                        alt="atlas"
+                      />
+                      <p className="c-font c-font--h2">{slide.address}</p>
+                      <p className="c-font-body c-font-body--sm-w600-wide c-font--uppercase">
+                        {slide.suburb}
                       </p>
                     </div>
-                    <p className="case-studies-item__description c-font-body c-font-body--md-w400-normal">
-                      {slide.description}
-                    </p>
-                    <div className="case-studies-item__stats">
-                      {slide.stats.map((stat) => (
-                        <div
-                          key={stat.label}
-                          className="case-studies-item__stat"
-                        >
-                          <p className="c-font-body c-font-body--xs-w600-wide c-font--uppercase">
-                            {stat.label}
-                          </p>
-                          <p
-                            className="c-font--h3 c-font-body"
-                            style={{ letterSpacing: "var(--font-spacing)" }}
-                          >
-                            {stat.value}
-                          </p>
+
+                    <div className="case-studies-item__amenities c-font-body c-font-body--sm-w600-wide">
+                      {amenitiesFor(slide).map(({ value, label }) => (
+                        <div key={label} className="case-studies-item__amenity">
+                          <span>{value}</span>
+                          <span>{label}</span>
                         </div>
                       ))}
                     </div>
                   </div>
+
+                  <div className="case-studies-item__content">
+                    <div className="case-studies-item__image-wrap">
+                      <Image
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 840px"
+                        src={slide.image}
+                        alt={slide.address}
+                      />
+                    </div>
+                    <div className="case-studies-item__body">
+                      <div className="case-studies-item__tag-row">
+                        <span className="c-btn c-btn--secondary-solid c-btn--lg">
+                          {slide.tag}
+                        </span>
+                        <p className="case-studies-item__price c-font-body c-font-body--sm-w600-wide">
+                          ${formatPrice(slide.price)}
+                        </p>
+                      </div>
+                      <p className="case-studies-item__description c-font-body c-font-body--md-w400-normal">
+                        {slide.description}
+                      </p>
+                      <div className="case-studies-item__stats">
+                        {slide.stats.map((stat) => (
+                          <div
+                            key={stat.label}
+                            className="case-studies-item__stat"
+                          >
+                            <p className="c-font-body c-font-body--xs-w600-wide c-font--uppercase">
+                              {stat.label}
+                            </p>
+                            <p className="case-studies-item__stat-value c-font--h3 c-font-body">
+                              {stat.value}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Carousel>
-      </div>
-    </section>
-  </>
-);
+              </SwiperSlide>
+            ))}
+
+            {navButtons}
+          </Carousel>
+        </div>
+      </section>
+    </>
+  );
+};
 
 export default CaseStudies;
