@@ -1,9 +1,10 @@
-'use client'
+"use client";
 
-import Presentation from './page-components/Presentation'
-import LikelyBuyerDynamic from './page-components/LikelyBuyerDynamic'
-import ComparableListings from './page-components/ComparableListings'
-import CaseStudies from './page-components/CaseStudies'
+import Presentation from "./page-components/Presentation";
+import LikelyBuyerDynamic from "./page-components/LikelyBuyerDynamic";
+import ComparableListings from "./page-components/ComparableListings";
+import CaseStudies from "./page-components/CaseStudies";
+import KindWords from "./page-components/KindWords";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <LikelyBuyerDynamic />
       <ComparableListings />
       <CaseStudies />
+      <KindWords />
     </Presentation>
-  )
+  );
 }

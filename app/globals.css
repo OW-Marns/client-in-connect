@@ -9,17 +9,23 @@
   --color-tertiary: #283b48;
   --color-accent: #ebe4df;
 
-  --section-title-icon: 24px;
+  --bg-image-placeholder: rgba(0, 0, 0, 0.05);
   --font-spacing-15: 1.5px;
+
+  --section-padding-block: 36px;
+  --section-padding-inline: 24px;
+
+  --section-title-icon: 24px;
   --spacer-32: 20px;
   --grid-spacer-40: 24px;
   --element-block-gap: 32px;
-
-  --bg-image-placeholder: rgba(0, 0, 0, 0.05);
 }
 
 @media screen and (min-width: 640px) {
   :root {
+    --section-padding-block: 48px;
+    --section-padding-inline: 28px;
+
     --section-title-icon: 28px;
     --spacer-32: 24px;
     --grid-spacer-40: 32px;
@@ -29,6 +35,9 @@
 
 @media screen and (min-width: 1024px) {
   :root {
+    --section-padding-block: 80px;
+    --section-padding-inline: 32px;
+
     --section-title-icon: 32px;
     --spacer-32: 32px;
     --grid-spacer-40: 40px;
@@ -68,7 +77,11 @@ body {
   line-height: 20px;
 }
 
-/* .c-font--h5 {} */
+.c-font--h5 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+}
 
 /* .c-font--h6 {} */
 
@@ -89,6 +102,11 @@ body {
     font-size: 20px;
     line-height: 24px;
   }
+
+  .c-font--h5 {
+    font-size: 18px;
+    line-height: 20px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -105,6 +123,11 @@ body {
   .c-font--h4 {
     font-size: 22px;
     line-height: 28px;
+  }
+
+  .c-font--h5 {
+    font-size: 20px;
+    line-height: 24px;
   }
 }
 
@@ -203,6 +226,14 @@ body {
   letter-spacing: 1.5px;
 }
 
+/* LG */
+.c-font-body--lg-w400-normal {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
 @media screen and (min-width: 640px) {
   .c-font-body--xs-w400-normal {
     font-size: 10px;
@@ -263,9 +294,18 @@ body {
     font-size: 14px;
     line-height: 18px;
   }
+
+  .c-font-body--lg-w400-normal {
+    font-size: 15px;
+    line-height: 17px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
+  .c-font-body--lg-w400-normal {
+    font-size: 16px;
+    line-height: 18px;
+  }
 }
 
 /*==============================================
@@ -501,7 +541,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 36px 24px;
+  padding: var(--section-padding-block) var(--section-padding-inline);
 }
 
 .section__container {
@@ -561,10 +601,6 @@ body {
 }
 
 @media screen and (min-width: 640px) {
-  .section {
-    padding: 48px 28px;
-  }
-
   .section__container {
     gap: 40px;
   }
@@ -588,10 +624,6 @@ body {
 }
 
 @media screen and (min-width: 1024px) {
-  .section {
-    padding: 80px 32px;
-  }
-
   .section__container {
     gap: 56px;
   }
