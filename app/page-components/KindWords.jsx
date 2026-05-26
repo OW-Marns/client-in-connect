@@ -72,7 +72,7 @@ const KindWords = () => (
         background: var(--bg-image-placeholder);
       }
 
-      .kind-words__photo {
+      .kind-words__photo-wrap img {
         object-fit: cover;
       }
 
@@ -128,7 +128,6 @@ const KindWords = () => (
         <div className="kind-words__photo-wrap">
           <Image
             fill
-            className="kind-words__photo"
             sizes="(max-width: 640px) 100vw, 50vw"
             src="https://s3-alpha-sig.figma.com/img/b5fc/1d1b/3b0ea603d221ebf99dab7a16561c9546?Expires=1780876800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Rl3rfR~Kxude5IjBKXbCvLAf8bOvfiDLYiXaONTIORYoCJZ0IthhQK87NB-0O-E-52ITkvY6UHHFhS27rf6eienrXCQJ3SiJwoIoEVxdKNXoWpr~jifUMrSk7E9-K0rfqaU9zJYTYdH6jmH5kjLmGQWALld49uUZW2P-VcM5Y5bqZq01GffBZsfdEJDPsDH-6d5cJsrpmPAByZrd-YCOf6uy1h7FrP4Alw0u95Ekv4q8j9jP~~RoBbm0Cn8iuhBi-kF5tlUdM7bKZFAI3tX7XP6g1J7QuncE1bk88yb0VZGtGI7cq1KyuffSKbsplu96wuQf~y8M57ws~7LM4O~GaQ__"
             alt="Kind words"
