@@ -8,6 +8,7 @@ import KindWords from "./page-components/KindWords";
 import GetYourHomeReady from "./page-components/GetYourHomeReady";
 import OurSalesProcess from "./page-components/OurSalesProcess";
 import WhatYourMarketingLooksLike from "./page-components/WhatYourMarketingLooksLike";
+import PriceGuideAndFees from "./page-components/PriceGuideAndFees";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <GetYourHomeReady />
       <OurSalesProcess />
       <WhatYourMarketingLooksLike />
+      <PriceGuideAndFees />
     </Presentation>
   );
 }
