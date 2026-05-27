@@ -23,6 +23,9 @@
   --grid-spacer-40: 24px;
   --grid-spacer-80: 24px;
   --element-block-gap: 32px;
+
+  --btn-md-padding-block: 9px;
+  --btn-md-padding-inline: 24px;
 }
 
 @media screen and (min-width: 640px) {
@@ -38,6 +41,9 @@
     --grid-spacer-40: 32px;
     --grid-spacer-80: 32px;
     --element-block-gap: 40px;
+
+    --btn-md-padding-block: 10.5px;
+    --btn-md-padding-inline: 32px;
   }
 }
 
@@ -54,6 +60,9 @@
     --grid-spacer-40: 40px;
     --grid-spacer-80: 80px;
     --element-block-gap: 56px;
+
+    --btn-md-padding-block: 12px;
+    --btn-md-padding-inline: 40px;
   }
 }
 
