@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
 import Carousel from "../components/Carousel";
 import { cn } from "../utils/cn";
@@ -378,6 +379,8 @@ const CalendarMobile = () => {
         key={activeWeek}
         initialSlide={activeSlide}
         loop={false}
+        pagination={false}
+        navigation={false}
         slidesPerView={1}
         onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)}
       >
@@ -425,8 +428,19 @@ const YourCampaignTimeline = () => {
   return (
     <>
       <style>{`
-        #your_campaign_timeline {
+        .your_campaign_timeline_wrapper {
+          width: 100%;
+          position: relative;
           background-color: var(--color-surface);
+        }
+
+        #your_campaign_timeline {
+          position: relative;
+          z-index: 1;
+        }
+
+        #your_campaign_timeline .swiper .swiper-slide {
+          min-height: 0;
         }
 
         .yct-tabs {
@@ -696,110 +710,168 @@ const YourCampaignTimeline = () => {
         .yct-tl-activity--inactive {
           opacity: 0.45;
         }
+
+        /* ===== BANNER ===== */
+
+        .yct-banner {
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+          aspect-ratio: 1440 / 860;
+          background-color: var(--color-primary);
+          justify-content: flex-end;
+        }
+
+        .yct-banner__overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(30, 30, 30, 0.3);
+        }
+
+        // .yct-banner__content {
+        //   position: relative;
+        //   height: 100%;
+        //   display: flex;
+        //   flex-direction: column;
+        //   justify-content: flex-end;
+        //   padding-block: var(--spacer-20);
+        // }
+
+        .yct-banner__heading {
+          color: var(--color-base-white);
+        }
+
+        @media screen and (min-width: 640px) {
+          .yct-banner { margin-top: -254px; }
+        }
+
+        @media screen and (min-width: 1024px) {
+          .yct-banner { margin-top: -290px; }
+        }
       `}</style>
 
-      <section id="your_campaign_timeline" className="section">
-        <div className="section__container">
-          <div className="section__header">
-            <div className="section__header__group section__header__group--default">
-              <p className="section__title section__title--light">
-                YOUR CAMPAIGN TIMELINE
-              </p>
-              <p className="c-font c-font--h2">
-                Deliverables to successfully market and sell your home
-              </p>
+      <div className="your_campaign_timeline_wrapper">
+        <section id="your_campaign_timeline" className="section">
+          <div className="section__container">
+            <div className="section__header">
+              <div className="section__header__group section__header__group--default">
+                <p className="section__title section__title--light">
+                  YOUR CAMPAIGN TIMELINE
+                </p>
+                <p className="c-font c-font--h2">
+                  Deliverables to successfully market and sell your home
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div className="yct-tabs">
-            {[
-              { id: "calendar", label: "CALENDAR" },
-              { id: "timeline", label: "TIMELINE" },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                className={cn(
-                  "yct-tab c-font-body c-font-body--sm-w600-wide c-font--uppercase",
-                  activeTab === tab.id && "yct-tab--active",
-                )}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+            <div className="yct-tabs">
+              {[
+                { id: "calendar", label: "CALENDAR" },
+                { id: "timeline", label: "TIMELINE" },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  className={cn(
+                    "yct-tab c-font-body c-font-body--sm-w600-wide c-font--uppercase",
+                    activeTab === tab.id && "yct-tab--active",
+                  )}
+                  onClick={() => setActiveTab(tab.id)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
 
-          {activeTab === "calendar" ? (
-            <>
-              <CalendarMobile />
-              <CalendarDesktop />
-            </>
-          ) : (
-            <div className="yct-timeline">
-              {data.dates.map((week, weekIdx) => {
-                const daysWithEvents = week
-                  .map((dateStr, dayIdx) => ({
-                    dateStr,
-                    events: data.calendar[weekIdx][dayIdx],
-                  }))
-                  .filter(({ events }) => events.length > 0);
+            {activeTab === "calendar" ? (
+              <>
+                <CalendarMobile />
+                <CalendarDesktop />
+              </>
+            ) : (
+              <div className="yct-timeline">
+                {data.dates.map((week, weekIdx) => {
+                  const daysWithEvents = week
+                    .map((dateStr, dayIdx) => ({
+                      dateStr,
+                      events: data.calendar[weekIdx][dayIdx],
+                    }))
+                    .filter(({ events }) => events.length > 0);
 
-                if (daysWithEvents.length === 0) return null;
+                  if (daysWithEvents.length === 0) return null;
 
-                return (
-                  <div
-                    key={weekIdx}
-                    className={cn(
-                      "yct-tl-week",
-                      weekIdx % 2 === 0
-                        ? "yct-tl-week--accent"
-                        : "yct-tl-week--white",
-                    )}
-                  >
-                    <div className="yct-tl-week__label">
-                      <p className="c-font-body c-font-body--xs-w600-wide c-font--uppercase">
-                        WEEK {weekIdx + 1}
-                      </p>
-                    </div>
-                    <div className="yct-tl-events">
-                      {daysWithEvents.map(({ dateStr, events }) => {
-                        const { monthName, day } = parseDateStr(dateStr);
-                        return (
-                          <div key={dateStr} className="yct-tl-event">
-                            <div className="yct-tl-event__date">
-                              <p className="yct-tl-event__month c-font-body c-font-body--xs-w600-wide c-font--uppercase">
-                                {monthName}
-                              </p>
-                              <p className="c-font-body c-font--h3 c-font--spacing">
-                                {day}
-                              </p>
-                            </div>
-                            <div className="yct-tl-divider" />
-                            <div className="yct-tl-event__activities">
-                              {events.map((event) => (
-                                <p
-                                  key={event.id}
-                                  className={cn(
-                                    "c-font-body c-font-body--md-w400-normal",
-                                    !event.active &&
-                                      "yct-tl-activity--inactive",
-                                  )}
-                                >
-                                  {event.event}
+                  return (
+                    <div
+                      key={weekIdx}
+                      className={cn(
+                        "yct-tl-week",
+                        weekIdx % 2 === 0
+                          ? "yct-tl-week--accent"
+                          : "yct-tl-week--white",
+                      )}
+                    >
+                      <div className="yct-tl-week__label">
+                        <p className="c-font-body c-font-body--xs-w600-wide c-font--uppercase">
+                          WEEK {weekIdx + 1}
+                        </p>
+                      </div>
+                      <div className="yct-tl-events">
+                        {daysWithEvents.map(({ dateStr, events }) => {
+                          const { monthName, day } = parseDateStr(dateStr);
+                          return (
+                            <div key={dateStr} className="yct-tl-event">
+                              <div className="yct-tl-event__date">
+                                <p className="yct-tl-event__month c-font-body c-font-body--xs-w600-wide c-font--uppercase">
+                                  {monthName}
                                 </p>
-                              ))}
+                                <p className="c-font-body c-font--h3 c-font--spacing">
+                                  {day}
+                                </p>
+                              </div>
+                              <div className="yct-tl-divider" />
+                              <div className="yct-tl-event__activities">
+                                {events.map((event) => (
+                                  <p
+                                    key={event.id}
+                                    className={cn(
+                                      "c-font-body c-font-body--md-w400-normal",
+                                      !event.active &&
+                                        "yct-tl-activity--inactive",
+                                    )}
+                                  >
+                                    {event.event}
+                                  </p>
+                                ))}
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </section>
+
+        <div className="section yct-banner">
+          <Image
+            fill
+            alt=""
+            src="https://s3-alpha-sig.figma.com/img/e5fe/e253/5c215de9c0cadd86eab0f1f3fbc71a29?Expires=1780876800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=T7GSx7GXZ9GZ6IcbJrSFbhU52GYIVnGiYj4EEa9qN5x0Bx0NlDeG187wR~bX0U67rSZxARHuCI0iYPVw6BGKDONgV5aYR6Xcf~2m3uqoNVJ2I9gJIa117bsXGeUZBZ1Cbhe90dc0q6l1wzR3OzkriDcZQZmQkK8wQwaQa1VNo9W5sMbs2gcan8oWZkeUyNEkP7pfqUyz6aItbzhAjD216QJFDNEg93mA-rdPbm4QfxExI3Fnh0QsHVY7AYi6E4uQqkrwY9xH-C9N4l66FKgt~GZycISFFS9b-DeDt4yi~PjSmnWzv8CO6vTdIlaD7xn69BxKKdVqHcnBGMBzB-v61Q__"
+            style={{ objectFit: "cover" }}
+          />
+          <div className="yct-banner__overlay" />
+          <div className="section__container">
+            <p
+              className="c-font c-font--h2 yct-banner__heading"
+              style={{ width: "100%" }}
+            >
+              What your marketing looks like
+            </p>
+          </div>
         </div>
-      </section>
+      </div>
     </>
   );
 };
