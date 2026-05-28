@@ -201,7 +201,7 @@ const CaseStudies = () => {
         }
 
         .case-studies-item__stat-value {
-          letter-spacing: var(--font-spacing-15);
+          letter-spacing: var(--font-spacing-1p5);
         }
 
         @media screen and (min-width: 640px) {

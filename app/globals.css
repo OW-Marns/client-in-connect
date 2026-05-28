@@ -8,14 +8,17 @@
   --color-secondary: #734137;
   --color-tertiary: #283b48;
   --color-accent: #ebe4df;
+  --color-surface: #f5f5f5;
 
   --bg-image-placeholder: rgba(0, 0, 0, 0.05);
-  --font-spacing-15: 1.5px;
+  --font-spacing-1p5: 1.5px;
+  --font-spacing-3: 3px;
 
   --section-padding-block: 36px;
   --section-padding-inline: 24px;
 
   --section-title-icon: 24px;
+  --spacer-16: 8px;
   --spacer-20: 14px;
   --spacer-24: 16px;
   --spacer-32: 20px;
@@ -24,6 +27,8 @@
   --grid-spacer-80: 24px;
   --element-block-gap: 32px;
 
+  --btn-sm-padding-block: 7px;
+  --btn-sm-padding-inline: 20px;
   --btn-md-padding-block: 9px;
   --btn-md-padding-inline: 24px;
 }
@@ -34,6 +39,7 @@
     --section-padding-inline: 28px;
 
     --section-title-icon: 28px;
+    --spacer-16: 12px;
     --spacer-20: 16px;
     --spacer-24: 18px;
     --spacer-32: 24px;
@@ -42,6 +48,8 @@
     --grid-spacer-80: 32px;
     --element-block-gap: 40px;
 
+    --btn-sm-padding-block: 8.5px;
+    --btn-sm-padding-inline: 24px;
     --btn-md-padding-block: 10.5px;
     --btn-md-padding-inline: 32px;
   }
@@ -53,6 +61,7 @@
     --section-padding-inline: 32px;
 
     --section-title-icon: 32px;
+    --spacer-16: 16px;
     --spacer-20: 20px;
     --spacer-24: 24px;
     --spacer-32: 32px;
@@ -61,6 +70,8 @@
     --grid-spacer-80: 80px;
     --element-block-gap: 56px;
 
+    --btn-sm-padding-block: 10px;
+    --btn-sm-padding-inline: 28px;
     --btn-md-padding-block: 12px;
     --btn-md-padding-inline: 40px;
   }
@@ -170,6 +181,10 @@ body {
   text-transform: uppercase;
 }
 
+.c-font--spacing {
+  letter-spacing: var(--font-spacing-1p5);
+}
+
 .c-font-body {
   font-family: var(--font-inter);
 }
@@ -186,7 +201,7 @@ body {
   font-size: 8px;
   line-height: 12px;
   font-weight: 400;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--font-spacing-1p5);
 }
 
 .c-font-body--xs-w600-normal {
@@ -200,7 +215,7 @@ body {
   font-size: 8px;
   line-height: 12px;
   font-weight: 600;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--font-spacing-1p5);
 }
 
 /* SM */
@@ -215,7 +230,7 @@ body {
   font-size: 10px;
   line-height: 14px;
   font-weight: 400;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--font-spacing-1p5);
 }
 
 .c-font-body--sm-w600-normal {
@@ -229,7 +244,7 @@ body {
   font-size: 10px;
   line-height: 14px;
   font-weight: 600;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--font-spacing-1p5);
 }
 
 /* MD */
@@ -244,7 +259,7 @@ body {
   font-size: 12px;
   line-height: 16px;
   font-weight: 400;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--font-spacing-1p5);
 }
 
 .c-font-body--md-w600-normal {
@@ -258,7 +273,7 @@ body {
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--font-spacing-1p5);
 }
 
 /* LG */
@@ -350,7 +365,7 @@ body {
 .c-btn {
   font-family: var(--font-inter);
   font-weight: 600;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--font-spacing-1p5);
   text-transform: uppercase;
   text-wrap: nowrap;
 }
@@ -653,7 +668,7 @@ body {
   font-size: 10px;
   font-family: Inter;
   font-weight: 600;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--font-spacing-1p5);
   line-height: 14px;
   text-align: left;
 }

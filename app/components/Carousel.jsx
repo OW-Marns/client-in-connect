@@ -1,13 +1,13 @@
-import { Swiper } from 'swiper/react'
-import { cn } from '../utils/cn'
+import { Swiper } from "swiper/react";
+import { cn } from "../utils/cn";
 
 const Carousel = (props) => {
-  const { className, children, ...rest } = props
+  const { className, children, ...rest } = props;
   return (
-    <Swiper {...rest} className={cn('carousel-swiper', className)}>
+    <Swiper {...rest} className={cn("carousel-swiper w-full", className)}>
       {children}
     </Swiper>
-  )
-}
+  );
+};
 
-export default Carousel
+export default Carousel;
