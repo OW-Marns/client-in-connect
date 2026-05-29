@@ -30,112 +30,114 @@ const slides = [
   },
 ];
 
-const KindWords = () => (
-  <>
-    <style>{`
-      .kind-words {
-        width: 100%;
-        background-color: var(--color-tertiary);
-      }
+const KindWords = () => {
+  return (
+    <>
+      <style>{`
+        .kind-words {
+          width: 100%;
+          background-color: var(--color-tertiary);
+        }
 
-      .kind-words__inner {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-      }
-
-      .kind-words__panel {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: var(--element-block-gap);
-        padding: var(--section-padding-block) var(--section-padding-inline);
-        color: var(--color-base-white);
-        overflow: hidden;
-      }
-
-      .kind-words__slide {
-        display: flex;
-        flex-direction: column;
-        gap: var(--element-block-gap);
-      }
-
-      .kind-words__quote {
-        white-space: pre-line;
-      }
-
-      .kind-words__photo-wrap {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        aspect-ratio: 1 / 1;
-        background: var(--bg-image-placeholder);
-      }
-
-      .kind-words__photo-wrap img {
-        object-fit: cover;
-      }
-
-      @media screen and (min-width: 1024px) {
         .kind-words__inner {
-          grid-template-columns: repeat(2, 1fr);
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
         }
 
         .kind-words__panel {
-          min-height: 720px;
-          padding: var(--section-padding-block);
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          gap: var(--element-block-gap);
+          padding: var(--section-padding-block) var(--section-padding-inline);
+          color: var(--color-base-white);
+          overflow: hidden;
+        }
+
+        .kind-words__slide {
+          display: flex;
+          flex-direction: column;
+          gap: var(--element-block-gap);
+        }
+
+        .kind-words__quote {
+          white-space: pre-line;
         }
 
         .kind-words__photo-wrap {
-          aspect-ratio: unset;
+          position: relative;
+          width: 100%;
+          height: 100%;
+          aspect-ratio: 1 / 1;
+          background: var(--bg-image-placeholder);
         }
-      }
-    `}</style>
 
-    <section id="kind_words" className="kind-words">
-      <div className="kind-words__inner">
-        <div className="kind-words__panel">
-          <p className="section__title section__title--dark">KIND WORDS</p>
-          <Carousel
-            className="common-carousel-swiper w-full h-full"
-            modules={[Autoplay, Pagination]}
-            loop={true}
-            slidesPerView={1}
-            spaceBetween={24}
-            breakpoints={{
-              640: { spaceBetween: 28 },
-              1024: { spaceBetween: 80 },
-            }}
-            centeredSlides={false}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-          >
-            {slides.map((slide) => (
-              <SwiperSlide key={slide.id}>
-                <div className="kind-words__slide">
-                  <p className="c-font c-font--h5 kind-words__quote">
-                    {slide.quote}
-                  </p>
-                  <p className="c-font-body c-font-body--lg-w400-normal">
-                    {slide.author}
-                  </p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Carousel>
-        </div>
+        .kind-words__photo-wrap img {
+          object-fit: cover;
+        }
 
-        <div className="kind-words__photo-wrap">
-          <Image
-            fill
-            sizes="(max-width: 640px) 100vw, 50vw"
-            src="https://s3-alpha-sig.figma.com/img/b5fc/1d1b/3b0ea603d221ebf99dab7a16561c9546?Expires=1780876800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Rl3rfR~Kxude5IjBKXbCvLAf8bOvfiDLYiXaONTIORYoCJZ0IthhQK87NB-0O-E-52ITkvY6UHHFhS27rf6eienrXCQJ3SiJwoIoEVxdKNXoWpr~jifUMrSk7E9-K0rfqaU9zJYTYdH6jmH5kjLmGQWALld49uUZW2P-VcM5Y5bqZq01GffBZsfdEJDPsDH-6d5cJsrpmPAByZrd-YCOf6uy1h7FrP4Alw0u95Ekv4q8j9jP~~RoBbm0Cn8iuhBi-kF5tlUdM7bKZFAI3tX7XP6g1J7QuncE1bk88yb0VZGtGI7cq1KyuffSKbsplu96wuQf~y8M57ws~7LM4O~GaQ__"
-            alt="Kind words"
-          />
+        @media screen and (min-width: 1024px) {
+          .kind-words__inner {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .kind-words__panel {
+            min-height: 720px;
+            padding: var(--section-padding-block);
+          }
+
+          .kind-words__photo-wrap {
+            aspect-ratio: unset;
+          }
+        }
+      `}</style>
+
+      <section id="kind_words" className="kind-words">
+        <div className="kind-words__inner">
+          <div className="kind-words__panel">
+            <p className="section__title section__title--dark">KIND WORDS</p>
+            <Carousel
+              className="common-carousel-swiper w-full h-full"
+              modules={[Autoplay, Pagination]}
+              loop={true}
+              slidesPerView={1}
+              spaceBetween={24}
+              breakpoints={{
+                640: { spaceBetween: 28 },
+                1024: { spaceBetween: 80 },
+              }}
+              centeredSlides={false}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+            >
+              {slides.map((slide) => (
+                <SwiperSlide key={slide.id}>
+                  <div className="kind-words__slide">
+                    <p className="c-font c-font--h5 kind-words__quote">
+                      {slide.quote}
+                    </p>
+                    <p className="c-font-body c-font-body--lg-w400-normal">
+                      {slide.author}
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Carousel>
+          </div>
+
+          <div className="kind-words__photo-wrap">
+            <Image
+              fill
+              sizes="(max-width: 640px) 100vw, 50vw"
+              src="https://s3-alpha-sig.figma.com/img/b5fc/1d1b/3b0ea603d221ebf99dab7a16561c9546?Expires=1780876800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Rl3rfR~Kxude5IjBKXbCvLAf8bOvfiDLYiXaONTIORYoCJZ0IthhQK87NB-0O-E-52ITkvY6UHHFhS27rf6eienrXCQJ3SiJwoIoEVxdKNXoWpr~jifUMrSk7E9-K0rfqaU9zJYTYdH6jmH5kjLmGQWALld49uUZW2P-VcM5Y5bqZq01GffBZsfdEJDPsDH-6d5cJsrpmPAByZrd-YCOf6uy1h7FrP4Alw0u95Ekv4q8j9jP~~RoBbm0Cn8iuhBi-kF5tlUdM7bKZFAI3tX7XP6g1J7QuncE1bk88yb0VZGtGI7cq1KyuffSKbsplu96wuQf~y8M57ws~7LM4O~GaQ__"
+              alt="Kind words"
+            />
+          </div>
         </div>
-      </div>
-    </section>
-  </>
-);
+      </section>
+    </>
+  );
+};
 
 export default KindWords;
