@@ -175,7 +175,7 @@ const ArrowRight = () => (
     aria-hidden="true"
   >
     <path
-      d="M3 8H13M13 8L8 3M13 8L8 13"
+      d="M8 3V13M3 8H13"
       stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
