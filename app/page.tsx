@@ -11,10 +11,12 @@ import WhatYourMarketingLooksLike from "./page-components/WhatYourMarketingLooks
 import PriceGuideAndFees from "./page-components/PriceGuideAndFees";
 import MarketingYourHome from "./page-components/MarketingYourHome";
 import YourCampaignTimeline from "./page-components/YourCampaignTimeline";
+import MeetYourTeam from "./page-components/MeetYourTeam";
 
 export default function Home() {
   return (
     <Presentation>
+      <MeetYourTeam />
       <YourCampaignTimeline />
       <MarketingYourHome />
       <LikelyBuyerDynamic />
